@@ -9,6 +9,8 @@
 # Slawomir Adamus <melthalion@gmail.com>, 2021
 # Paweł Wodyński <pw@myodoo.pl>, 2021
 # Maksym <ms@myodoo.pl>, 2021
+# Tadeusz Karpiński <tadeuszkarpinski@gmail.com>, 2023
+# Tadeusz Karpiński, 2023
 # 
 msgid ""
 msgstr ""
@@ -16,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-08 06:19+0000\n"
 "PO-Revision-Date: 2021-09-14 12:24+0000\n"
-"Last-Translator: Maksym <ms@myodoo.pl>, 2021\n"
+"Last-Translator: Tadeusz Karpiński, 2023\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -240,7 +242,7 @@ msgstr ""
 #: code:addons/pos_coupon/static/src/js/ControlButtons/PromoCodeButton.js:0
 #, python-format
 msgid "Enter Promotion or Coupon Code"
-msgstr ""
+msgstr "Wprowadź kod promocyjny lub kuponu"
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_pos_order_line__is_program_reward
@@ -315,7 +317,7 @@ msgstr "Konfiguracja punktu sprzedaży"
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_pos_order_line
 msgid "Point of Sale Order Lines"
-msgstr ""
+msgstr "Linie zamówień w punktach sprzedaży"
 
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_pos_order
@@ -330,7 +332,7 @@ msgstr "Punkt sprzedaży"
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__pos_order_ids
 msgid "Pos Order"
-msgstr ""
+msgstr "POS Zamówienie "
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_order_line__program_id
@@ -445,7 +447,7 @@ msgstr "Twój kod promocyjny"
 #. module: pos_coupon
 #: model:mail.template,subject:pos_coupon.mail_coupon_template
 msgid "Your reward coupon from {{ object.program_id.company_id.name }} "
-msgstr ""
+msgstr "Kupon z nagrodą od {{ object.program_id.company_id.name }}."
 
 #. module: pos_coupon
 #: model:mail.template,name:pos_coupon.mail_coupon_template

@@ -7,6 +7,7 @@
 # Éder Brito <britoederr@gmail.com>, 2021
 # Martin Trigaux, 2021
 # Elio Viniski <elio@edoo.me>, 2022
+# Kevilyn Rosa, 2023
 # Layna Nascimento, 2023
 # 
 msgid ""
@@ -28,7 +29,7 @@ msgstr ""
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
 #, python-format
 msgid "(left:"
-msgstr ""
+msgstr "(esquerda:"
 
 #. module: pos_sale
 #. openerp-web
@@ -107,7 +108,7 @@ msgstr "Cliente"
 #: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
 #, python-format
 msgid "Customer loading error"
-msgstr ""
+msgstr "Erro de carregamento do cliente"
 
 #. module: pos_sale
 #. openerp-web
@@ -484,7 +485,7 @@ msgstr "A taxa da moeda para a moeda da taxa aplicável na data do pedido"
 #: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
 #, python-format
 msgid "There was a problem in loading the %s customer."
-msgstr ""
+msgstr "Houve um problema ao carregar o %s cliente."
 
 #. module: pos_sale
 #: model:ir.model.fields,help:pos_sale.field_pos_config__crm_team_id
@@ -502,7 +503,7 @@ msgstr "Este produto será aplicado quando o pagamento for feito"
 #. module: pos_sale
 #: model:ir.model.fields,help:pos_sale.field_pos_config__down_payment_product_id
 msgid "This product will be used as down payment on a sale order."
-msgstr "Este produto será usado como antecipação em um pedido de venda."
+msgstr "Este produto será utilizado como entrada em um pedido de venda."
 
 #. module: pos_sale
 #. openerp-web
@@ -566,3 +567,5 @@ msgid ""
 "You have tried to charge a down payment of %s but only %s remains to be "
 "paid, %s will be applied to the purchase order line."
 msgstr ""
+"Você tentou cobrar um adiantamento de %s , mas só restam %s a serem pagos, "
+"%s serão aplicados à linha do pedido de compra."

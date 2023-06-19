@@ -304,7 +304,11 @@ function addRow(editor, beforeOrAfter) {
     if (!row) return;
     const newRow = document.createElement('tr');
     const cells = row.querySelectorAll('td');
-    newRow.append(...Array.from(Array(cells.length)).map(() => document.createElement('td')));
+    newRow.append(...Array.from(Array(cells.length)).map(() => {
+        const td = document.createElement('td');
+        td.append(document.createElement('br'));
+        return td;
+    }));
     row[beforeOrAfter](newRow);
 }
 function deleteTable(editor, table) {
@@ -497,7 +501,7 @@ export const editorCommands = {
         const end = leftLeafFirstPath(...pos1).next().value;
         const li = new Set();
         for (const node of leftLeafFirstPath(...pos2)) {
-            const cli = closestBlock(node);
+            const cli = closestElement(node,'li');
             if (
                 cli &&
                 cli.tagName == 'LI' &&

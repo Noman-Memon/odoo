@@ -3427,7 +3427,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_tax_report_line_form
 msgid "Carryover"
-msgstr ""
+msgstr "Carryover"
 
 #. module: account
 #: code:addons/account/models/account_tax_report.py:0
@@ -10455,7 +10455,7 @@ msgstr "Dipost Sebelum"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_journal
 msgid "Posted Entries only"
-msgstr ""
+msgstr "Hanya Entri yang sudah Di-Post"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_move_filter
@@ -10470,7 +10470,7 @@ msgstr "Artikel Jurnal Terekam"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_journal
 msgid "Posted and Draft Entries"
-msgstr ""
+msgstr "Entri Draft dan Terekam"
 
 #. module: account
 #: code:addons/account/models/account_move.py:0
@@ -10604,7 +10604,7 @@ msgstr "Cetak cek untuk membayar pemasok Anda"
 #: model:ir.model.fields.selection,name:account.selection__account_bank_statement__state__posted
 #: model_terms:ir.ui.view,arch_db:account.view_bank_statement_search
 msgid "Processing"
-msgstr ""
+msgstr "Memproses"
 
 #. module: account
 #: model:ir.model,name:account.model_product_product
@@ -11285,7 +11285,7 @@ msgstr "Tanggal Pembalikan"
 #: code:addons/account/wizard/accrued_orders.py:0
 #, python-format
 msgid "Reversal date must be posterior to date."
-msgstr ""
+msgstr "Tanggal reversal harus lebih awal dari tanggal."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__reversed_entry_id
@@ -15631,6 +15631,12 @@ msgid "Warning for %s"
 msgstr "Peringatan untuk %s"
 
 #. module: account
+#: code:addons/account/models/account_move.py:0
+#, python-format
+msgid "Warning for Cash Rounding Method: %s"
+msgstr ""
+
+#. module: account
 #: model_terms:ir.ui.view,arch_db:account.partner_view_buttons
 msgid "Warning on the Invoice"
 msgstr "Peringatan pada Faktur"
@@ -16446,6 +16452,12 @@ msgstr ""
 #. module: account
 #: code:addons/account/models/account_move.py:0
 #, python-format
+msgid "You must specify the Profit Account (company dependent)"
+msgstr ""
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+#, python-format
 msgid "You need to add a line before posting."
 msgstr "You need to add a line before posting."
 
@@ -16756,7 +16768,7 @@ msgstr "pada"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "outstanding credits"
-msgstr ""
+msgstr "kredit belum lunas"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form

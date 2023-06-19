@@ -424,7 +424,7 @@ class StockMove(models.Model):
 
         def key_virtual_available(move, incoming=False):
             warehouse_id = move.location_dest_id.warehouse_id.id if incoming else move.location_id.warehouse_id.id
-            return warehouse_id, max(move.date, now)
+            return warehouse_id, max(move.date or now, now)
 
         # Prefetch efficiently virtual_available for _consuming_picking_types draft move.
         prefetch_virtual_available = defaultdict(set)
@@ -1407,6 +1407,7 @@ class StockMove(models.Model):
             if float_compare(taken_quantity, int(taken_quantity), precision_digits=rounding) != 0:
                 taken_quantity = 0
 
+        self.env['base'].flush()
         try:
             with self.env.cr.savepoint():
                 if not float_is_zero(taken_quantity, precision_rounding=self.product_id.uom_id.rounding):
