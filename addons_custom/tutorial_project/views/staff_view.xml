@@ -1,0 +1,105 @@
+<odoo>
+
+    # Form View
+    <record id="rest_staff_view_form" model="ir.ui.view">
+        <field name="name">rest.staff.view.form</field>
+        <field name="model">rest.staff</field>
+        <field name="arch" type="xml">
+            <form string="staff form">
+                <header>
+                    <button name="new_function" string="Check" type="object" class="oe_highlight"/>
+                    <button name="delete_one2many" string="delete lines" type="object" class="oe_highlight"/>
+                    <field name="status" widget="statusbar"/>
+                    <button name="changestatus" string="Change Status" type="object" class="oe_highlight" attrs="{'invisible':[('status','!=','active')]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="dob"/>
+                            <field name="country_code"/>
+                        </group>
+                        <group>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                            <field name="country_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="country_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="staff line">
+                            <field name="staff_line_ids">
+                                <tree string="staff line" editable="top" widget="section_and_note_one2many">
+                                    <control>
+                                        <create string="Add a Line"/>
+                                        <create string="Add a Section" context="{'default_display_type':'line_section'}"/>
+                                        <create string="Add a Note" context="{'default_display_type':'line_note'}"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                </tree>
+                                <form string="staff line">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="product_id"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    # Tree View
+
+    # if we want to change color of records according to base on any filed in tree view then define decoratio-info tag in tree view
+    and remember field must be present in tree view on behalf of which we want to change color of records.
+    we can use multiple decoratio-info, info,success,warning,danger,muted,bf(bf means bold),...
+    <record id="rest_staff_view_tree" model="ir.ui.view">
+        <field name="name">rest.staff.view.tree</field>
+        <field name="model">rest.staff</field>
+        <field name="arch" type="xml">
+            <tree string="staff Tree" decoration-info="status=='active'">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="dob"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="country_id" widget="many2button"/>
+                <field name="country_ids" widget="many2many_tags"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    # Search View
+    <record id="rest_staff_view_search" model="ir.ui.view">
+        <field name="name">rest.staff.view.search</field>
+        <field name="model">rest.staff</field>
+        <field name="arch" type="xml">
+            <search string="staff search" >
+                <field name="name"/>
+                <field name="age"/>
+                <field name="mobile"/>
+                <field name="email" filter_domain="['|',('email','ilike',self),('mobile','ilike',self)]"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="rest_staff_action_id" model="ir.actions.act_window">
+        <field name="name">ourTeam</field>
+        <field name="res_model">rest.staff</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_empty_folder">
+                there is no records of staff
+            </p>
+        </field>
+    </record>
+</odoo>
