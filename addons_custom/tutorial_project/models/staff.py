@@ -12,6 +12,7 @@ class RestStaff(models.Model):
     dob = fields.Date(string='Date_Of_Birth')
     mobile = fields.Char(string='Mobile_Number')
     email = fields.Char(string="Email")
+    gender = fields.Selection([('male','Male'),('female','Female')], string="Gender")
     country_id = fields.Many2one('res.country',
                                  string="Country")  # when we want to get 1 record from multiple records of other models or objects
     country_ids = fields.Many2many('res.country', string="Countries")

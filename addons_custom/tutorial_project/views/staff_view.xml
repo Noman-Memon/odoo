@@ -10,13 +10,15 @@
                     <button name="new_function" string="Check" type="object" class="oe_highlight"/>
                     <button name="delete_one2many" string="delete lines" type="object" class="oe_highlight"/>
                     <field name="status" widget="statusbar"/>
-                    <button name="changestatus" string="Change Status" type="object" class="oe_highlight" attrs="{'invisible':[('status','!=','active')]}"/>
+                    <button name="changestatus" string="Change Status" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('status','!=','active')]}"/>
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="name"/>
                             <field name="age"/>
+                            <field name="gender"/>
                             <field name="dob"/>
                             <field name="country_code"/>
                         </group>
@@ -33,7 +35,8 @@
                                 <tree string="staff line" editable="top" widget="section_and_note_one2many">
                                     <control>
                                         <create string="Add a Line"/>
-                                        <create string="Add a Section" context="{'default_display_type':'line_section'}"/>
+                                        <create string="Add a Section"
+                                                context="{'default_display_type':'line_section'}"/>
                                         <create string="Add a Note" context="{'default_display_type':'line_note'}"/>
                                     </control>
                                     <field name="sequence" widget="handle"/>
@@ -56,7 +59,8 @@
 
     # Tree View
 
-    # if we want to change color of records according to base on any filed in tree view then define decoratio-info tag in tree view
+    # if we want to change color of records according to base on any filed in tree view then define decoratio-info tag
+    in tree view
     and remember field must be present in tree view on behalf of which we want to change color of records.
     we can use multiple decoratio-info, info,success,warning,danger,muted,bf(bf means bold),...
     <record id="rest_staff_view_tree" model="ir.ui.view">
@@ -68,6 +72,7 @@
                 <field name="name"/>
                 <field name="age"/>
                 <field name="dob"/>
+                <field name="gender"/>
                 <field name="mobile"/>
                 <field name="email"/>
                 <field name="country_id" widget="many2button"/>
@@ -82,11 +87,23 @@
         <field name="name">rest.staff.view.search</field>
         <field name="model">rest.staff</field>
         <field name="arch" type="xml">
-            <search string="staff search" >
+            <search string="staff search">
                 <field name="name"/>
                 <field name="age"/>
                 <field name="mobile"/>
                 <field name="email" filter_domain="['|',('email','ilike',self),('mobile','ilike',self)]"/>
+                # adding filters
+                <separator/>
+                <filter string="Active" name="status" domain="[('status','=', 'active')]"/>
+                <filter string="Resigned" name="status" domain="[('status','=', 'resigned')]"/>
+                <separator/>
+                <filter string="Male" name="gender" domain="[('gender','=', 'male')]"/>
+                <filter string="Female" name="gender" domain="[('gender','=', 'female')]"/>
+                # adding group_by
+                <group string="Group By" expand="0">
+                    <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
+                    <filter string="Status" name="status" context="{'group_by':'status'}"/>
+                </group>
             </search>
         </field>
     </record>

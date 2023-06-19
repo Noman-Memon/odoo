@@ -1,0 +1,5 @@
+<odoo>
+    <menuitem id="data_main_menu" name="Collect"/>
+    <menuitem id="data_sub_menu" name="Collection" parent="mongodb_integration.data_main_menu"
+              action="mongodb_integration.data_collection_action_id"/>
+</odoo>

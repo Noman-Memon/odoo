@@ -1,0 +1,28 @@
+<odoo>
+
+    # Form View
+    <record id="data_collection_view_form" model="ir.ui.view">
+        <field name="name">data.collection.view.form</field>
+        <field name="model">data.collection</field>
+        <field name="arch" type="xml">
+            <form string="custom form">
+                <header>
+                    <button name="collectData" string="Collect" type="object" class="oe_highlight"/>
+                </header>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="data_collection_action_id" model="ir.actions.act_window">
+        <field name="name">Action</field>
+        <field name="res_model">data.collection</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_empty_folder">
+                there is no records of staff
+            </p>
+        </field>
+    </record>
+</odoo>
