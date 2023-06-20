@@ -22,6 +22,7 @@ class RestStaff(models.Model):
     sequence = fields.Integer(string="Seq.")
     status = fields.Selection([('active', 'Active'), ('resigned', 'Resigned')], string="status", readonly=True,
                               default='active')
+    image = fields.Binary(string="Image")
 
     def new_function(self):
         print("Hello!.")

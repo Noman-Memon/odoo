@@ -14,6 +14,7 @@
                             attrs="{'invisible':[('status','!=','active')]}"/>
                 </header>
                 <sheet>
+                    <field name="image" widget="image" style="width:150px;height:150px;"/>
                     <group>
                         <group>
                             <field name="name"/>
@@ -109,15 +110,64 @@
         </field>
     </record>
 
+    # Kanban view
+    <!--    these are default parameters which is must to show kanban view(<kanban string="staff kanban" class="o_res_partner_kanban">,-->
+    <!--   different type of classes are available but mostly used is this, <templates>, <t t-name="kanban-box">) this are mandatory-->
+    <!--    after this we can define div as we want-->
+
+    <record id="rest_staff_view_kanban" model="ir.ui.view">
+        <field name="name">rest.staff.view.kanban</field>
+        <field name="model">rest.staff</field>
+        <field name="arch" type="xml">
+            <kanban string="staff kanban" class="o_res_partner_kanban">
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click" style="height:135px;background-color:#D6C2AA">
+                            <div style="width:30%;float:left;display:inline-block;">
+                                <img alt="Avatar" t-att-src="kanban_image('rest.staff','image',record.id.raw_value)"
+                                     style="width:100px;height:120px;"/>
+                            </div>
+                            <div style="width:70%;float:right;display:inline-block;">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <b>Name:</b>
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        <b>Age:</b>
+                                        <field name="age"/>
+                                    </li>
+                                    <li>
+                                        <b>Mobile:</b>
+                                        <field name="mobile"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    # for Showing image on record and image on kanban view
+    1. create image field in model as a Binary
+    <!--    2. put this field in form view where <sheet tag start> <field name="image" widget="image" style="width:150px;height:150px;"/>-->
+    <!--    3. put <field name="id"/> in kanban view before <templates/> tag-->
+    <!--    4. create new <div> <img alt="Avatar" t-att-src="kanban_image('rest.staff','image',record.id.raw_value)"/></div>-->
     # action id
     <!--    if we want to set default search (by any field or set by group_by) we need to add
         context like this after search_default_add name of selection e.g.. active,resigned,male,female,gender,status
         <field name="context">{'search_default_male':1}</field>-->
-    
+
     <record id="rest_staff_action_id" model="ir.actions.act_window">
         <field name="name">ourTeam</field>
         <field name="res_model">rest.staff</field>
-        <field name="view_mode">tree,form,search</field>
+        <field name="view_mode">tree,form,search,kanban</field>
         <field name="help" type="html">
             <p class="o_view_no_content_empty_folder">
                 there is no records of staff
