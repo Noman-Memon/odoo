@@ -32,7 +32,7 @@
                     <notebook>
                         <page string="staff line">
                             <field name="staff_line_ids">
-                                <tree string="staff line" editable="top" widget="section_and_note_one2many">
+                                <tree string="staff line" editable="bottom" widget="section_and_note_one2many">
                                     <control>
                                         <create string="Add a Line"/>
                                         <create string="Add a Section"
@@ -83,6 +83,7 @@
     </record>
 
     # Search View
+
     <record id="rest_staff_view_search" model="ir.ui.view">
         <field name="name">rest.staff.view.search</field>
         <field name="model">rest.staff</field>
@@ -92,31 +93,36 @@
                 <field name="age"/>
                 <field name="mobile"/>
                 <field name="email" filter_domain="['|',('email','ilike',self),('mobile','ilike',self)]"/>
-                # adding filters
                 <separator/>
-                <filter string="Active" name="status" domain="[('status','=', 'active')]"/>
-                <filter string="Resigned" name="status" domain="[('status','=', 'resigned')]"/>
+                <filter string="Active" name="active" domain="[('status','=','active')]"/>
+                <filter string="Resigned" name="resigned" domain="[('status','=','resigned')]"/>
                 <separator/>
-                <filter string="Male" name="gender" domain="[('gender','=', 'male')]"/>
-                <filter string="Female" name="gender" domain="[('gender','=', 'female')]"/>
-                # adding group_by
+                <filter string="Male" name="male" domain="[('gender','=','male')]"/>
+                <filter string="Female" name="female" domain="[('gender','=','female')]"/>
+                <separator/>
                 <group string="Group By" expand="0">
                     <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
+                    <separator/>
                     <filter string="Status" name="status" context="{'group_by':'status'}"/>
                 </group>
             </search>
         </field>
     </record>
 
-
+    # action id
+    <!--    if we want to set default search (by any field or set by group_by) we need to add
+        context like this after search_default_add name of selection e.g.. active,resigned,male,female,gender,status
+        <field name="context">{'search_default_male':1}</field>-->
+    
     <record id="rest_staff_action_id" model="ir.actions.act_window">
         <field name="name">ourTeam</field>
         <field name="res_model">rest.staff</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,search</field>
         <field name="help" type="html">
             <p class="o_view_no_content_empty_folder">
                 there is no records of staff
             </p>
         </field>
+        <field name="context">{'search_default_male':1}</field>
     </record>
 </odoo>
