@@ -1,5 +1,4 @@
 <odoo>
-
     # Form View
     <record id="rest_staff_view_form" model="ir.ui.view">
         <field name="name">rest.staff.view.form</field>
@@ -60,10 +59,12 @@
 
     # Tree View
 
-    # if we want to change color of records according to base on any filed in tree view then define decoratio-info tag
-    in tree view
-    and remember field must be present in tree view on behalf of which we want to change color of records.
-    we can use multiple decoratio-info, info,success,warning,danger,muted,bf(bf means bold),...
+    <!--    if we want to change color of records according to base on any filed in tree view then define decoratio-info tag-->
+    <!--    in tree view-->
+    <!--    and remember field must be present in tree view on behalf of which we want to change color of records.-->
+    <!--    we can use multiple decoratio-info, info,success,warning,danger,muted,bf(bf means bold),...-->
+
+
     <record id="rest_staff_view_tree" model="ir.ui.view">
         <field name="name">rest.staff.view.tree</field>
         <field name="model">rest.staff</field>
@@ -115,6 +116,13 @@
     <!--   different type of classes are available but mostly used is this, <templates>, <t t-name="kanban-box">) this are mandatory-->
     <!--    after this we can define div as we want-->
 
+    <!--    for Showing image on record and image on kanban view-->
+    <!--    1. create image field in model as a Binary-->
+    <!--    2. put this field in form view where <sheet tag start> <field name="image" widget="image" style="width:150px;height:150px;"/>-->
+    <!--    3. put <field name="id"/> in kanban view before <templates/> tag-->
+    <!--    4. create new <div> <img alt="Avatar" t-att-src="kanban_image('rest.staff','image',record.id.raw_value)"/></div>-->
+
+
     <record id="rest_staff_view_kanban" model="ir.ui.view">
         <field name="name">rest.staff.view.kanban</field>
         <field name="model">rest.staff</field>
@@ -142,28 +150,30 @@
                                         <b>Mobile:</b>
                                         <field name="mobile"/>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
-
                     </t>
                 </templates>
-
             </kanban>
         </field>
     </record>
 
-    # for Showing image on record and image on kanban view
-    1. create image field in model as a Binary
-    <!--    2. put this field in form view where <sheet tag start> <field name="image" widget="image" style="width:150px;height:150px;"/>-->
-    <!--    3. put <field name="id"/> in kanban view before <templates/> tag-->
-    <!--    4. create new <div> <img alt="Avatar" t-att-src="kanban_image('rest.staff','image',record.id.raw_value)"/></div>-->
-    # action id
+
     <!--    if we want to set default search (by any field or set by group_by) we need to add
         context like this after search_default_add name of selection e.g.. active,resigned,male,female,gender,status
         <field name="context">{'search_default_male':1}</field>-->
 
+
+    <!--        # if we want to show selected fields orders then we use domain e.g.-->
+    <!--        <field name="domain">[('gender', '=', 'male')]</field>-->
+    <!--        <field name="domain">[('status', '=', 'active')]</field>-->
+    <!--    (in domain we pass list   but   in context we pass dictionary)&#45;&#45;&#45;&#45; in context if we want select default value -->
+    <!--    we must use default_ before field name e.g.. default_gender-->
+    <!--    we can also use two conditions at a time in context search_default and default_field name-&#45;&#45;-->
+    <!--    <field name="context">{'default_gender':'male','search_default_male':1}</field>-->
+
+    <!--    action ID for all records-->
     <record id="rest_staff_action_id" model="ir.actions.act_window">
         <field name="name">ourTeam</field>
         <field name="res_model">rest.staff</field>
@@ -173,6 +183,33 @@
                 there is no records of staff
             </p>
         </field>
-        <field name="context">{'search_default_male':1}</field>
+    </record>
+
+    <!--    # action ID for male records-->
+    <record id="rest_staff_male_action_id" model="ir.actions.act_window">
+        <field name="name">Male Records</field>
+        <field name="res_model">rest.staff</field>
+        <field name="view_mode">tree,form,search,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_empty_folder">
+                there is no records of staff
+            </p>
+        </field>
+        <field name="domain">[('gender','=','male')]</field>
+        <field name="context">{'default_gender':'male'}</field>
+    </record>
+
+    <!--    # action ID for female records-->
+    <record id="rest_staff_female_action_id" model="ir.actions.act_window">
+        <field name="name">Female Records</field>
+        <field name="res_model">rest.staff</field>
+        <field name="view_mode">tree,form,search,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_empty_folder">
+                there is no records of staff
+            </p>
+        </field>
+        <field name="domain">[('gender','=','female')]</field>
+        <field name="context">{'default_gender':'female'}</field>
     </record>
 </odoo>
