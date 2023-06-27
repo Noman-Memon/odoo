@@ -26,6 +26,9 @@ class RestStaff(models.Model):
     status = fields.Selection([('active', 'Active'), ('resigned', 'Resigned')], string="status", readonly=True,
                               default='active')
     image = fields.Binary(string="Image")
+    hand_salary = fields.Float(string="In Hand Salary")
+    epf_efi = fields.Float(string="EPF+ESI")
+    ctc_salary = fields.Float(string="CTC", compute="calc_ctc")
 
     def new_function(self):
         print("Hello!.")
@@ -61,6 +64,21 @@ class RestStaff(models.Model):
         for record in self:
             if record.age <= 18:
                 raise ValidationError(_(f"Age must be 18+ {record.age} is not acceptable"))
+
+    # @api.depends is used to set compute attribute
+    # create field with compute attribute(compute="function name")
+    # create function and define logic in it
+    # put fields in api.depends on which this calculation depends e.g..(@api.depends('hand_salary', 'epf_efi'))
+    @api.depends('hand_salary', 'epf_efi')
+    def calc_ctc(self):
+        ctc = 0
+        for record in self:
+            if record.hand_salary:
+                ctc = ctc + record.hand_salary
+            if record.epf_efi:
+                ctc = ctc + record.epf_efi
+            record.ctc_salary = ctc
+            break
 
 
 class RestStaffLines(models.Model):
