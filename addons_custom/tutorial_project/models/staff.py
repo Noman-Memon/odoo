@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class RestStaff(models.Model):
@@ -49,6 +50,17 @@ class RestStaff(models.Model):
                 record.status = 'resigned'
             else:
                 record.status = 'active'
+
+    # @api.constrains is used for specified field validation e.g.. @api.constrains('age')
+    #     from odoo import api, and underscore(_)
+    #     create function and put filed name in constrains on which we want to set validation
+    #     _ is used to popup validation error e.g... raise ValidationError(_("Age must be 18+"))
+
+    @api.constrains('age')
+    def age_validation(self):
+        for record in self:
+            if record.age <= 18:
+                raise ValidationError(_(f"Age must be 18+ {record.age} is not acceptable"))
 
 
 class RestStaffLines(models.Model):
