@@ -6,8 +6,10 @@ class RestStaff(models.Model):
     _description = 'This model store data of staff'
     _rec_name = 'name'  # rec_name is used to show records according to specidief field like age,dob,email, etc...
     _order = 'age'  # _order is used to show list or tree according to specified filed , bydefault its shows by id , we canalso specified asc or desc
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string='Name', size=50)
+    # if we want to see any changes in any field then we added this (track_visibilty='always')in specific field
+    name = fields.Char(string='Name', size=50, track_visibility="always")
     age = fields.Integer(string='Age')
     dob = fields.Date(string='Date_Of_Birth')
     mobile = fields.Char(string='Mobile_Number')

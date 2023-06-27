@@ -8,7 +8,7 @@
     'description': """Tutorial""",
     'category': 'For Study',
     'website': 'https://www.odoo.com',
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'mail'],
     'data': [
         'security/ir.model.access.csv',
         'views/staff_view.xml',
