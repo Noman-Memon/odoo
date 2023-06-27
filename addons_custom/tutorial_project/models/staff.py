@@ -33,6 +33,24 @@ class RestStaff(models.Model):
     def new_function(self):
         print("Hello!.")
 
+    # search method give all records id  inform of tuple
+    # we can also define specific conditions in search method
+    # after getting orders applying loop to it and access singal record.field data
+    #
+    # browse method take singal id or list of id's '
+    def check_orm(self):
+        # search_var = self.env['rest.staff'].search([])
+        search_var = self.env['rest.staff'].search([('gender', '=', 'male'), ('status', '=', 'active')])
+        # search_var = list(search_var)
+        print(search_var)
+        for rec in search_var:
+            print("rec :-----", rec)
+            # print(rec.name, rec.country_id.name, rec.country_ids)
+            for country in rec.country_ids:
+                print(rec.name, rec.country_id.name, country.name)
+            # browse_id = self.env['rest.staff'].browse(rec.id)
+            # print(browse_id.name,browse_id.country_id.name)
+
     # this function is used to delete all rows of current record line items.
     def delete_one2many(self):
         for record in self:
