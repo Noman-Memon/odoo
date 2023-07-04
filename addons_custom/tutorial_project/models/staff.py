@@ -30,19 +30,35 @@ class RestStaff(models.Model):
     epf_efi = fields.Float(string="EPF+ESI")
     ctc_salary = fields.Float(string="CTC", compute="calc_ctc")
 
+    # this function is used to update any record in selected model's object
     def new_function(self):
         print("Hello!.")
+        selected_id = self.env['rest.staff'].browse(11)
+        # selected_id.copy() # this method is used to copy selected order
+        # selected_id.unlink() # this method is used to delete selected order
+        selected_id.write({
+            'name': 'check write method',
+            'age': 45,
+            'gender': 'male',
+            'dob': '2000-1-1',
+        })
 
     # search method give all records id  inform of tuple
     # we can also define specific conditions in search method
     # after getting orders applying loop to it and access singal record.field data
     #
     # browse method take singal id or list of id's '
+    # for ref method--> copy any view id and find its External id in seeting-- techinical-- views and do this (search_ref = self.env.ref('tutorial_project.rest_staff_view_form'))
+    # it give browsable id now we can access any field of this id
     def check_orm(self):
-        # search_var = self.env['rest.staff'].search([])
-        search_var = self.env['rest.staff'].search([('gender', '=', 'male'), ('status', '=', 'active')])
-        # search_var = list(search_var)
+
+        search_ref = self.env.ref('tutorial_project.rest_staff_view_form')
+        search_var = self.env['rest.staff'].search([])
+        # search_var = self.env['rest.staff'].search([('gender', '=', 'male'), ('status', '=', 'active')]) # by default and condition is apply
+        # search_var = self.env['rest.staff'].search(['|',('gender', '=', 'male'), ('status', '=', 'active')]) # this is or condition is apply
+        # search_var = self.env['rest.staff'].search_count([])
         print(search_var)
+        print("search_ref------", search_ref, "priority-----", search_ref.priority, "active ------", search_ref.active)
         for rec in search_var:
             print("rec :-----", rec)
             # print(rec.name, rec.country_id.name, rec.country_ids)
@@ -50,6 +66,15 @@ class RestStaff(models.Model):
                 print(rec.name, rec.country_id.name, country.name)
             # browse_id = self.env['rest.staff'].browse(rec.id)
             # print(browse_id.name,browse_id.country_id.name)
+
+    # this function is used to create record in defined object through code
+    def orm_create(self):
+        self.env['rest.staff'].create({
+            'name': 'check create method',
+            'age': 25,
+            'gender': 'male',
+            'dob': '2000-1-1',
+        })
 
     # this function is used to delete all rows of current record line items.
     def delete_one2many(self):

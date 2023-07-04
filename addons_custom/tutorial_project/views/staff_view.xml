@@ -7,6 +7,7 @@
             <form string="staff form">
                 <header>
                     <button name="new_function" string="Check" type="object" class="oe_highlight"/>
+                    <button name="orm_create" string="orm create" type="object" class="oe_highlight"/>
                     <button name="delete_one2many" string="delete lines" type="object" class="oe_highlight"/>
                     <button name="check_orm" string="Check Orm" type="object" class="oe_highlight"/>
                     <field name="status" widget="statusbar"/>
@@ -89,6 +90,7 @@
     <!--    in tree view-->
     <!--    and remember field must be present in tree view on behalf of which we want to change color of records.-->
     <!--    we can use multiple decoratio-info, info,success,warning,danger,muted,bf(bf means bold),...-->
+    <!--        if we want show sum of any field or average of any field then add attribute on that field-->
 
 
     <record id="rest_staff_view_tree" model="ir.ui.view">
@@ -98,12 +100,12 @@
             <tree string="staff Tree" decoration-info="status=='active'">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
-                <field name="age"/>
+                <field name="age" avg="Average of age"/>
                 <field name="dob"/>
                 <field name="gender"/>
                 <field name="mobile"/>
                 <field name="email"/>
-                <field name="ctc_salary"/>
+                <field name="ctc_salary" sum="Sum of ctc_salary"/>
                 <field name="country_id" widget="many2button"/>
                 <field name="country_ids" widget="many2many_tags"/>
                 <field name="status"/>
