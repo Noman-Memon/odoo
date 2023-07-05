@@ -1,0 +1,83 @@
+<odoo>
+    <record id="rest_staff_wizard_view_form" model="ir.ui.view">
+        <field name="name">rest.staff.wizard.view.form</field>
+        <field name="model">rest.staff.wizard</field>
+        <field name="arch" type="xml">
+            <form string="staff form">
+                <!--                # object button is used to call any created python function & action button is used to redirect provided action Id-->
+                <sheet>
+                    <field name="image" widget="image" style="width:150px;height:150px;"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="dob"/>
+                            <field name="country_code"/>
+                        </group>
+                        <group>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                            <field name="country_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="country_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="staff line">
+                            <field name="staff_line_ids">
+                                <tree string="staff line" editable="bottom" widget="section_and_note_one2many">
+                                    <control>
+                                        <create string="Add a Line"/>
+                                        <create string="Add a Section"
+                                                context="{'default_display_type':'line_section'}"/>
+                                        <create string="Add a Note" context="{'default_display_type':'line_note'}"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                </tree>
+                                <form string="staff line">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="product_id"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <div style="float:right;padding-right:40px;">
+                        <div style="float:left;">
+                            <h6 style="margin-bottom:5px;margin-top:5px;">In Hand Salary</h6>
+                            <br/>
+                            <h6 style="margin-bottom:5px;">EPF+EFI</h6>
+                            <br/>
+                            <h6>CTC</h6>
+
+                        </div>
+                        <div style="float:right;">
+                            <field name="hand_salary"/>
+                            <br/>
+                            <br/>
+                            <field name="epf_efi"/>
+                            <br/>
+                            <br/>
+                            <field name="ctc_salary"/>
+
+                        </div>
+                    </div>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="rest_staff_wizard_action_id" model="ir.actions.act_window">
+        <field name="name">ourTeam</field>
+        <field name="res_model">rest.staff.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="tutorial_project.rest_staff_wizard_view_form"/>
+    </record>
+
+
+</odoo>

@@ -132,9 +132,9 @@ class RestStaff(models.Model):
     def create(self, values):
         if values.get('seq_num', _('New')) == _('New'):
             values['seq_num'] = self.env['ir.sequence'].next_by_code('res.seq.staff') or _('New')
-        if not values.get('staff_line_ids'):
-            raise ValidationError(_("line items necessary"))
         res = super(RestStaff, self).create(values)
+        # if not values.get('staff_line_ids'):
+        #     raise ValidationError(_("line items necessary"))
         if values.get('gender') == 'male':
             res['name'] = 'Mr.' + values['name']
         elif values.get('gender') == 'female':
@@ -146,8 +146,8 @@ class RestStaff(models.Model):
 
     def write(self, values):
         res = super(RestStaff, self).write(values)
-        if not values.get('staff_line_ids'):
-            raise ValidationError(_("line items necessary"))
+        # if not values.get('staff_line_ids'):
+        #     raise ValidationError(_("line items necessary"))
         if values.get('gender') == 'male':
             self.name = 'Mr.' + values['name']
         elif values.get('gender') == 'female':

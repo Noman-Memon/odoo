@@ -541,7 +541,7 @@ class _lt:
             return other + _._get_translation(self._source)
         return NotImplemented
 
-_ = GettextAlias()
+_: GettextAlias = GettextAlias()
 
 
 def quote(s):
