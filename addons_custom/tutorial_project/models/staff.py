@@ -123,6 +123,29 @@ class RestStaff(models.Model):
             record.ctc_salary = ctc
             break
 
+    @api.model
+    def create(self, values):
+        res = super(RestStaff, self).create(values)
+        if values.get('gender') == 'male':
+            res['name'] = 'Mr.' + values['name']
+        elif values.get('gender') == 'female':
+            res['name'] = 'Mrs.' + values['name']
+        else:
+            return res
+        print("self----", self, "res-----", res, "values-----", values)
+        return res
+
+    def write(self, values):
+        res = super(RestStaff, self).write(values)
+        if values.get('gender') == 'male':
+            self.name = 'Mr.' + values['name']
+        elif values.get('gender') == 'female':
+            self.name = 'Mrs.' + values['name']
+        else:
+            return res
+        print("self----", self, "res-----", res, "values-----", values)
+        return res
+
 
 class RestStaffLines(models.Model):
     _name = 'rest.staff.lines'

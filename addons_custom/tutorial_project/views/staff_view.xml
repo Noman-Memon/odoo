@@ -203,7 +203,7 @@
     <!--    <field name="context">{'default_gender':'male','search_default_male':1}</field>-->
 
     <!--    action ID for all records-->
-    <record id="rest_staff_action_id" model="ir.actions.act_window">
+        <record id="rest_staff_action_id" model="ir.actions.act_window">
         <field name="name">ourTeam</field>
         <field name="res_model">rest.staff</field>
         <field name="view_mode">tree,form,search,kanban</field>
