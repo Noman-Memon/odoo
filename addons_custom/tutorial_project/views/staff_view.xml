@@ -5,9 +5,12 @@
         <field name="model">rest.staff</field>
         <field name="arch" type="xml">
             <form string="staff form">
+                <!--                # object button is used to call any created python function & action button is used to redirect provided action Id-->
                 <header>
                     <button name="new_function" string="Check" type="object" class="oe_highlight"/>
                     <button name="orm_create" string="orm create" type="object" class="oe_highlight"/>
+                    <button name="%(sale.action_quotations_with_onboarding)d" string="go to sales" type="action"
+                            class="oe_highlight"/>
                     <button name="delete_one2many" string="delete lines" type="object" class="oe_highlight"/>
                     <button name="check_orm" string="Check Orm" type="object" class="oe_highlight"/>
                     <field name="status" widget="statusbar"/>

@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 # in seq_num filed copy attribute is used to ensure not take repeated value in this field
@@ -155,6 +155,13 @@ class RestStaff(models.Model):
         else:
             return res
         print("self----", self, "res-----", res, "values-----", values)
+        return res
+
+    def unlink(self):
+        for rec in self:
+            if rec.status == "active":
+                raise UserError(_("Active records can't deleted"))
+        res = super(RestStaff, self).unlink()
         return res
 
 
