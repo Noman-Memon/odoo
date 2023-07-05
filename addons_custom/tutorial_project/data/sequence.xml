@@ -1,0 +1,12 @@
+<odoo>
+<!--    # create any unique name with .notation and this name is used when we call super during create function-->
+    <!--    # if we want to increment sequence number by any specified value then add number_increment field-->
+    <record id="sequence_for_rest_staff" model="ir.sequence">
+        <field name="name">sequence for rest staff</field>
+        <field name="code">res.seq.staff</field>
+        <field name="padding">4</field>
+        <field name="prefix">RS</field>
+        <field name="company_id" eval="False"/>
+        <!--        <field name="number_increment">5</field>-->
+    </record>
+</odoo>

@@ -2,6 +2,10 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
+# in seq_num filed copy attribute is used to ensure not take repeated value in this field
+# some of the fields not generated in database so index=True is used create this field in database mandatory
+# create data folder in project --> create sequence.xml file in it and define this path in manifest file 'data/sequence.xml'
+#
 class RestStaff(models.Model):
     _name = 'rest.staff'
     _description = 'This model store data of staff'
@@ -29,6 +33,7 @@ class RestStaff(models.Model):
     hand_salary = fields.Float(string="In Hand Salary")
     epf_efi = fields.Float(string="EPF+ESI")
     ctc_salary = fields.Float(string="CTC", compute="calc_ctc")
+    seq_num = fields.Char(string="Seq no.", readonly=True, copy=False, index=True, default=lambda self: _('New'))
 
     # this function is used to update any record in selected model's object
     def new_function(self):
@@ -125,6 +130,10 @@ class RestStaff(models.Model):
 
     @api.model
     def create(self, values):
+        if values.get('seq_num', _('New')) == _('New'):
+            values['seq_num'] = self.env['ir.sequence'].next_by_code('res.seq.staff') or _('New')
+        if not values.get('staff_line_ids'):
+            raise ValidationError(_("line items necessary"))
         res = super(RestStaff, self).create(values)
         if values.get('gender') == 'male':
             res['name'] = 'Mr.' + values['name']
@@ -137,6 +146,8 @@ class RestStaff(models.Model):
 
     def write(self, values):
         res = super(RestStaff, self).write(values)
+        if not values.get('staff_line_ids'):
+            raise ValidationError(_("line items necessary"))
         if values.get('gender') == 'male':
             self.name = 'Mr.' + values['name']
         elif values.get('gender') == 'female':
@@ -151,7 +162,7 @@ class RestStaffLines(models.Model):
     _name = 'rest.staff.lines'
     _description = 'This model store line data of staff'
 
-    name = fields.Char(string="Name", size=50)
+    name = fields.Char(string="Name", size=50, required=True)
     connecting_field = fields.Many2one('rest.staff', string="staff ID")
     product_id = fields.Many2one('product.product', string="Products")
     sequence = fields.Integer(string="Seq.")

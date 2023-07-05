@@ -15,9 +15,13 @@
                             attrs="{'invisible':[('status','!=','active')]}"/>
                 </header>
                 <sheet>
+                    <h1>
+                        <field name="seq_num"/>
+                    </h1>
                     <field name="image" widget="image" style="width:150px;height:150px;"/>
                     <group>
                         <group>
+
                             <field name="name"/>
                             <field name="age"/>
                             <field name="gender"/>
@@ -98,6 +102,7 @@
         <field name="model">rest.staff</field>
         <field name="arch" type="xml">
             <tree string="staff Tree" decoration-info="status=='active'">
+                <field name="seq_num"/>
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="age" avg="Average of age"/>
@@ -203,7 +208,7 @@
     <!--    <field name="context">{'default_gender':'male','search_default_male':1}</field>-->
 
     <!--    action ID for all records-->
-        <record id="rest_staff_action_id" model="ir.actions.act_window">
+    <record id="rest_staff_action_id" model="ir.actions.act_window">
         <field name="name">ourTeam</field>
         <field name="res_model">rest.staff</field>
         <field name="view_mode">tree,form,search,kanban</field>
