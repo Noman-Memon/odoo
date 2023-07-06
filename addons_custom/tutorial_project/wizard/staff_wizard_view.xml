@@ -65,6 +65,12 @@
 
                         </div>
                     </div>
+                    <footer>
+                        <button name="update_function" string="Update Info" type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"
+                                class="btn_secondary"/>
+                    </footer>
                 </sheet>
 
             </form>
