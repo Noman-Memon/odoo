@@ -9,11 +9,11 @@ from odoo.exceptions import ValidationError, UserError
 class RestStaff(models.Model):
     _name = 'rest.staff'
     _description = 'This model store data of staff'
-    _rec_name = 'name'  # rec_name is used to show records according to specidief field like age,dob,email, etc...
-    _order = 'age'  # _order is used to show list or tree according to specified filed , bydefault its shows by id , we canalso specified asc or desc
+    _rec_name = 'name'  # rec_name is used to show records according to specifier field like age,dob,email, etc...
+    _order = 'age'  # _order is used to show list or tree according to specified filed , by-default its shows by id , we can also specified asc or desc
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    # if we want to see any changes in any field then we added this (track_visibilty='always')in specific field
+    # if we want to see any changes in any field then we added this (track_visibility='always')in specific field
     name = fields.Char(string='Name', size=50, track_visibility="always")
     age = fields.Integer(string='Age')
     dob = fields.Date(string='Date_Of_Birth')
@@ -34,6 +34,9 @@ class RestStaff(models.Model):
     epf_efi = fields.Float(string="EPF+ESI")
     ctc_salary = fields.Float(string="CTC", compute="calc_ctc")
     seq_num = fields.Char(string="Seq no.", readonly=True, copy=False, index=True, default=lambda self: _('New'))
+    rating = fields.Selection([('0', 'very low'), ('1', 'low'), ('2', 'high'), ('3', 'very high'), ('4', 'Excellent')],
+                              string="Rate")
+    active = fields.Boolean(string="Active", default=True)
 
     # this function is used to update any record in selected model's object
     def new_function(self):

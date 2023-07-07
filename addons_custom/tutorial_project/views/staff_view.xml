@@ -21,6 +21,13 @@
                             attrs="{'invisible':[('status','!=','active')]}"/>
                 </header>
                 <sheet>
+                    <!--                    how to make field as a button for making record archive or inactive-->
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive"
+                                style="background-color:LightGray;color:mediumpurple">
+                            <field name="active" widget="boolean_button" options="{'terminology':'archived'}"/>
+                        </button>
+                    </div>
                     <h1>
                         <field name="seq_num"/>
                     </h1>
@@ -33,6 +40,7 @@
                             <field name="gender"/>
                             <field name="dob"/>
                             <field name="country_code"/>
+                            <field name="rating" widget="priority"/>
                         </group>
                         <group>
                             <field name="mobile"/>

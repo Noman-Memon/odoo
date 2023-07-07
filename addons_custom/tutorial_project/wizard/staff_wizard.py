@@ -80,6 +80,10 @@ class RestStaffWizard(models.TransientModel):
 
         }
         upd_var.write(vals)
+        # if we want to not close wizard automatically then just return this
+        return {
+            'type': 'ir.actions.do.nothing'
+        }
 
 
 class RestStaffWizardLines(models.TransientModel):

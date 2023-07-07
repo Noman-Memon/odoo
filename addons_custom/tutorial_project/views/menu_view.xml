@@ -5,7 +5,7 @@
     <!--    mongodb_integration.data_collection_action_id)-->
 
     <menuitem id="restaurant_main_menu" name="Restaurant"/>
-    <menuitem id="restaurant_sub_menu" name="OurTeam" parent="tutorial_project.restaurant_main_menu"/>
+    <menuitem id="restaurant_sub_menu" name="OurTeam" parent="tutorial_project.restaurant_main_menu" sequence="10"/>
     <menuitem id="restaurant_all_records_sub_menu" name="All Records" parent="tutorial_project.restaurant_sub_menu"
               sequence="1"
               action="tutorial_project.rest_staff_action_id"/>
@@ -15,4 +15,8 @@
     <menuitem id="restaurant_female_records_sub_menu" name="Female Records"
               parent="tutorial_project.restaurant_sub_menu"
               action="tutorial_project.rest_staff_female_action_id" sequence="3"/>
+    <!--    # if we want to call wizard by menu then-->
+    <menuitem id="restaurant_update_wizard_menu" name="Open Wizard"
+              parent="tutorial_project.restaurant_main_menu"
+              action="tutorial_project.rest_staff_wizard_action_id" sequence="11"/>
 </odoo>
