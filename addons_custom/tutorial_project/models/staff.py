@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
+from datetime import datetime, date
 
 
 # in seq_num filed copy attribute is used to ensure not take repeated value in this field
@@ -37,6 +38,10 @@ class RestStaff(models.Model):
     rating = fields.Selection([('0', 'very low'), ('1', 'low'), ('2', 'high'), ('3', 'very high'), ('4', 'Excellent')],
                               string="Rate")
     active = fields.Boolean(string="Active", default=True)
+    default_date = fields.Date(string="Default-Date", default=lambda self: date.today())
+    default_datetime = fields.Date(string="Default-DateTime", default=lambda self: datetime.today())
+    login_user = fields.Many2one('res.users', string="User", default=lambda self: self.env.user.id)
+    user_company = fields.Many2one('res.company', string="Company", default=lambda self: self.env.user.company_id.id)
 
     # this function is used to update any record in selected model's object
     def new_function(self):
@@ -166,6 +171,9 @@ class RestStaff(models.Model):
                 raise UserError(_("Active records can't deleted"))
         res = super(RestStaff, self).unlink()
         return res
+
+    def call_by_menu(self):
+        print("call python function by menu")
 
 
 class RestStaffLines(models.Model):

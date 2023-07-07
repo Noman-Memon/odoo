@@ -19,4 +19,8 @@
     <menuitem id="restaurant_update_wizard_menu" name="Open Wizard"
               parent="tutorial_project.restaurant_main_menu"
               action="tutorial_project.rest_staff_wizard_action_id" sequence="11"/>
+    <!--    if we want to call any function by menuitem-->
+    <menuitem id="restaurant_function_call_by_menu" name="Function Call By Menu"
+              parent="tutorial_project.restaurant_main_menu"
+              action="tutorial_project.function_call_by_menu" sequence="12"/>
 </odoo>

@@ -1,4 +1,6 @@
 <odoo>
+    <!--    # if we want ti disable specific days of week then options attribute is use here 0 means sunday line 51-->
+    <!--    if we want to make any field readonly on the bases of other field value line 42-->
     # Form View
     <record id="rest_staff_view_form" model="ir.ui.view">
         <field name="name">rest.staff.view.form</field>
@@ -37,16 +39,20 @@
 
                             <field name="name"/>
                             <field name="age"/>
-                            <field name="gender"/>
+                            <field name="gender" attrs="{'readonly':[('dob','!=',False)]}"/>
                             <field name="dob"/>
                             <field name="country_code"/>
                             <field name="rating" widget="priority"/>
                         </group>
                         <group>
                             <field name="mobile"/>
-                            <field name="email"/>
+                            <field name="email" attrs="{'invisible':[('mobile','!=',False)]}"/>
                             <field name="country_id" options="{'no_open':True,'no_create':True}"/>
                             <field name="country_ids" widget="many2many_tags"/>
+                            <field name="default_date" options='{"datepicker":{"daysofweekDisabled":[0,6]}}'/>
+                            <field name="default_datetime"/>
+                            <field name="login_user"/>
+                            <field name="user_company"/>
                         </group>
                     </group>
                     <notebook>
@@ -259,5 +265,13 @@
         </field>
         <field name="domain">[('gender','=','female')]</field>
         <field name="context">{'default_gender':'female'}</field>
+    </record>
+    <!--    create action id for function call by menu-->
+    <record id="function_call_by_menu" model="ir.actions.server">
+        <field name="name">function_call_by_menu</field>
+        <!--        # get model id from security file -->
+        <field name="model_id" ref="tutorial_project.model_rest_staff"/>
+        <field name="state">code</field>
+        <field name="code">model.call_by_menu()</field>
     </record>
 </odoo>
