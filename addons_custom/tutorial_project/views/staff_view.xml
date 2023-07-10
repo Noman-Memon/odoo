@@ -36,11 +36,12 @@
                     <field name="image" widget="image" style="width:150px;height:150px;"/>
                     <group>
                         <group>
-
                             <field name="name"/>
                             <field name="age"/>
                             <field name="gender" attrs="{'readonly':[('dob','!=',False)]}"/>
                             <field name="dob"/>
+                            <field name="department"/>
+                            <field name="is_pak"/>
                             <field name="country_code"/>
                             <field name="rating" widget="priority"/>
                         </group>

@@ -21,6 +21,8 @@ class RestStaff(models.Model):
     mobile = fields.Char(string='Mobile_Number')
     email = fields.Char(string="Email")
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender")
+    department = fields.Many2one('rest.department', string="Department")
+    is_pak = fields.Boolean(string="Pakistani")
     country_id = fields.Many2one('res.country',
                                  string="Country")  # when we want to get 1 record from multiple records of other models or objects
     country_ids = fields.Many2many('res.country', string="Countries")
@@ -174,6 +176,30 @@ class RestStaff(models.Model):
 
     def call_by_menu(self):
         print("call python function by menu")
+
+    # if we want to set any field record by-default on the creation of record then we use default_get and set default field data
+    # if we get error then use @api.model
+    def default_get(self, fields):
+        res = super(RestStaff, self).default_get(fields)
+        lst = []
+        country = self.env['res.country'].search([('name', '=', 'India')])
+        countries = self.env['res.country'].search([('name', '=', 'Pakistan')])
+        for rec in countries:
+            lst.append(rec.id)
+        res['name'] = 'New'
+        res['age'] = 20
+        res['mobile'] = '0000000000'
+        res['is_pak'] = True
+        res['department'] = 1  # for many2one field pass record id
+        res['country_id'] = country  # this country have specific India's id
+        res['dob'] = date.today()
+        res['country_ids'] = [(6, 0, lst)]  # for many2many field
+        res['staff_line_ids'] = [(0, 0, {'name': 'First Record', 'product_id': 2}),
+                                 (0, 0, {'name': '2nd Record', 'product_id': 3})] # for one2many field
+
+        print(lst)
+        print(res)
+        return res
 
 
 class RestStaffLines(models.Model):

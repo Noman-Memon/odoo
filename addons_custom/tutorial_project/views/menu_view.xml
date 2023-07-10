@@ -23,4 +23,7 @@
     <menuitem id="restaurant_function_call_by_menu" name="Function Call By Menu"
               parent="tutorial_project.restaurant_main_menu"
               action="tutorial_project.function_call_by_menu" sequence="12"/>
+    <menuitem id="restaurant_department_menu" name="Department"
+              parent="tutorial_project.restaurant_main_menu"
+              action="tutorial_project.rest_staff_department_action_id" sequence="13"/>
 </odoo>

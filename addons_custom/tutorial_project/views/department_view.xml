@@ -1,0 +1,43 @@
+<odoo>
+
+
+    <record id="rest_staff_department_form" model="ir.ui.view">
+        <field name="name">rest.staff.department.form</field>
+        <field name="model">rest.department</field>
+        <field name="arch" type="xml">
+            <form string="department form">
+                <sheet>
+                    <h1>
+                        <field name="seq_num"/>
+                    </h1>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="rest_staff_department_tree" model="ir.ui.view">
+        <field name="name">rest.staff.department.tree</field>
+        <field name="model">rest.department</field>
+        <field name="arch" type="xml">
+            <tree string="department Tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="rest_staff_department_action_id" model="ir.actions.act_window">
+        <field name="name">Department</field>
+        <field name="res_model">rest.department</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_empty_folder">
+                there is no records of staff
+            </p>
+        </field>
+    </record>
+</odoo>
