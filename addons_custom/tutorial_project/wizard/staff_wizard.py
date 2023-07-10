@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api, _
 
 
 # create wizard folder in project
@@ -84,6 +84,33 @@ class RestStaffWizard(models.TransientModel):
         return {
             'type': 'ir.actions.do.nothing'
         }
+
+    # set default values on wizard fields from current record fields value
+    def default_get(self, fields):
+        res = super(RestStaffWizard, self).default_get(fields)
+        active_id = self._context.get('active_id')
+        print("active_id---", active_id)
+        brows_id = self.env['rest.staff'].browse(int(active_id))
+        print(brows_id)
+        lst1 = []
+        lst2 = []
+        for rec in brows_id.country_ids:
+            lst1.append(rec.id)
+
+        for rec in brows_id.staff_line_ids:
+            lst2.append((0, 0, {'name': rec.name, 'product_id': rec.product_id.id}))
+        res['name'] = brows_id.name
+        res['age'] = brows_id.age
+        # res['mobile'] = '0000000000'
+        # res['is_pak'] = True
+        # res['department'] = brows_id.department.id  # for many2one field pass record id
+        res['country_id'] = brows_id.country_id  # this country have specific India's id
+        # res['dob'] = date.today()
+        res['country_ids'] = [(6, 0, lst1)]  # for many2many field
+        res['staff_line_ids'] = lst2
+        # print(lst)
+        # print(res)
+        return res
 
 
 class RestStaffWizardLines(models.TransientModel):
