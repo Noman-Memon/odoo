@@ -68,6 +68,7 @@
                     <footer>
                         <button name="update_function" string="Update Info" type="object"
                                 class="oe_highlight"/>
+                        <button name="create_new_record" string="Create New Record" type="object" class="oe_highlight"/>
                         <button string="Cancel" special="cancel"
                                 class="btn_secondary"/>
                     </footer>

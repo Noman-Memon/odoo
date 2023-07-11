@@ -90,7 +90,7 @@ class RestStaffWizard(models.TransientModel):
         res = super(RestStaffWizard, self).default_get(fields)
         active_id = self._context.get('active_id')
         print("active_id---", active_id)
-        brows_id = self.env['rest.staff'].browse(int(active_id))
+        brows_id = self.env['rest.staff'].browse(active_id)
         print(brows_id)
         lst1 = []
         lst2 = []
@@ -112,6 +112,53 @@ class RestStaffWizard(models.TransientModel):
         # print(res)
         return res
 
+    # for create record from wizard 2 things we must know 1. where data comes from and in which object record record will be created
+    # here values come from 'rest.staff.wizard' and record will be create in 'rest.staff'
+    # there are 2 methods of creating record
+    # 1. line items will be create during creation of header
+    # 2. header and line item both create separately
+    def create_new_record(self):
+        lst = []
+        for rec in self.country_ids:
+            lst.append(rec.id)
+
+        # 1 method
+        lst1 = []
+        for rec in self.staff_line_ids:
+            lst1.append((0, 0, {'name': rec.name, 'product_id': rec.product_id.id}))
+        staff_id = self.env['rest.staff'].create({
+            'name': self.name,
+            'age': self.age,
+            'gender': self.gender,
+            'dob': self.dob,
+            'mobile': self.mobile,
+            'country_id': self.country_id.id,
+            'country_ids': [(6, 0, lst)],
+            'staff_line_ids': lst1,
+        })
+
+        # 2nd method
+        # in this method this is mandatory (staff_id line 129)
+        # for rec in self.staff_line_ids:
+        #     self.env['rest.staff.lines'].create({
+        #         'connecting_field': staff_id.id,
+        #         'name': rec.name,
+        #         'product_id': rec.product_id.id,
+        #     })
+
+        # if we want that when record created and we directly goes to this order then
+        context = dict(self.env.context)
+        context['form_view_initial_mode'] = 'edit'
+        return {
+            'name': _('New Staff created'),
+            'context': context,
+            'view_mode': 'form',
+            'res_model': 'rest.staff',
+            'res_id': staff_id.id,
+            'view_type': 'form',
+            'type': 'ir.actions.act_window',
+        }
+
 
 class RestStaffWizardLines(models.TransientModel):
     _name = 'rest.staff.wizard.lines'
@@ -121,3 +168,4 @@ class RestStaffWizardLines(models.TransientModel):
     connecting_field = fields.Many2one('rest.staff.wizard', string="staff ID")
     product_id = fields.Many2one('product.product', string="Products")
     sequence = fields.Integer(string="Seq.")
+
