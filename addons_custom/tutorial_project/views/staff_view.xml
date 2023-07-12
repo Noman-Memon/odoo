@@ -11,6 +11,7 @@
                 <header>
                     <button name="new_function" string="Check" type="object" class="oe_highlight"/>
                     <button name="orm_create" string="orm create" type="object" class="oe_highlight"/>
+                    <button name="report_print_button" string="Print Staff Data" type="object" class="oe_highlight"/>
                     <button name="%(sale.action_quotations_with_onboarding)d" string="go to sales" type="action"
                             class="oe_highlight"/>
                     <button name="%(tutorial_project.rest_staff_wizard_action_id)d" string="Update Staff Info"

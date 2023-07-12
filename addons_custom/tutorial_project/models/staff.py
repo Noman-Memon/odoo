@@ -204,8 +204,13 @@ class RestStaff(models.Model):
     # This function is called on staff_report.xml
     def get_values_in_report(self):
         current_datetime = datetime.now()
-        dict = {'first': 1, 'second': 2, 'third': 3, 'fourth': [1, 2, 3, 4, 5, 6, 7], 'current_datetime': current_datetime}
+        dict = {'first': 1, 'second': 2, 'third': 3, 'fourth': [1, 2, 3, 4, 5, 6, 7],
+                'current_datetime': current_datetime}
         return dict
+
+    # through this function we can print report by object button(redt_staff_report_id from staff_report.xml)
+    def report_print_button(self):
+        return self.env.ref('tutorial_project.rest_staff_report_id').report_action(self)
 
 
 class RestStaffLines(models.Model):

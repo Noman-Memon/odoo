@@ -112,7 +112,7 @@
                             <spen t-esc="valuesthroughfunction"/>
                             <!--                            or-->
                             <spen t-esc="valuesthroughfunction['fourth']"/>
-                            <spen t-esc="valuesthroughfunction['current_datetime    ']"/>
+                            <spen t-esc="valuesthroughfunction['current_datetime']"/>
                         </div>
                     </t>
                 </t>
