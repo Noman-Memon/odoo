@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="rest_staff_qweb_report_template">
+            <!--            # here docs work like a self (self means object and it is used in python file but in qweb doc means object and here o is loop's variable)-->
+            <t t-call="web.html_container">
+                <!--                from this way we itrate document fields and o is loop's variable-->
+                <t t-foreach="docs" t-as="o">
+
+                    <t t-call="web.internal_layout">
+                        <!--                        # external_layout is used for company data external_layout and-->
+                        <!--                        html_container both are default templates we just call it-->
+                        <div class="page">
+                            <br/>
+                            <br/>
+                            <h1>Normal fields data</h1>
+                            <ul>
+                                <li>Name:
+                                    <span t-field="o.name"/>
+                                </li>
+                                <li>Age:
+                                    <span t-field="o.age"/>
+                                </li>
+                                <li>Gender:
+                                    <span t-field="o.gender"/>
+                                </li>
+                                <li>Date Of Birth:
+                                    <span t-field="o.dob"/>
+                                </li>
+                                <li>Country:
+                                    <span t-field="o.country_id.name"/>
+                                </li>
+                                <li>Country:
+                                    <span t-field="o.country_id.id"/>
+                                </li>
+                                <li>Country:
+                                    <span t-field="o.country_id.code"/>
+                                </li>
+                                <li>Mobile:
+                                    <span t-field="o.mobile"/>
+                                </li>
+                                <h1>Many2one fields data</h1>
+                                <!--                                # collect data from many2many field-->
+                                <t t-foreach="o.country_ids" t-as="c">
+                                    <span t-field="c.name"/>
+                                    <br/>
+                                </t>
+                                <br/>
+                                <h1>One2many fields data</h1>
+                                <!--                                collect data from one2many fileds-->
+                                <table width="100%" style="border:1px solid black;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Product</th>
+                                    </tr>
+                                    <t t-foreach="o.staff_line_ids" t-as="sl">
+                                        <tr>
+
+                                            <th>
+                                                <span t-field="sl.name"/>
+
+                                            </th>
+                                            <th>
+
+                                                <span t-field="sl.product_id.name"/>
+                                            </th>
+                                            <br/>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <br/>
+                                <h1>Many2many fields data</h1>
+                                <!--                                # if we want to get data in table-->
+                                <table width="100%" style="border:1px solid black;">
+                                    <tr>
+                                        <th>Country Id</th>
+                                        <th>Country Name</th>
+                                        <th>Country Code</th>
+                                    </tr>
+                                    <t t-foreach="o.country_ids" t-as="c">
+                                        <tr>
+                                            <td>
+                                                <span t-field="c.id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="c.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="c.code"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </ul>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+
+    <!--    declare qweb report-->
+    <report
+            id="rest_staff_report_id"
+            model="rest.staff"
+            report_type="qweb-pdf"
+            string="Print Staff Data"
+            name="tutorial_project.rest_staff_qweb_report_template"
+            file="tutorial_project.rest_staff_qweb_report_template"
+    />
+</odoo>

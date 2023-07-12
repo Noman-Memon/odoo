@@ -159,7 +159,6 @@ class RestStaffWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
         }
 
-
 class RestStaffWizardLines(models.TransientModel):
     _name = 'rest.staff.wizard.lines'
     _description = 'This model store line data of staff'
