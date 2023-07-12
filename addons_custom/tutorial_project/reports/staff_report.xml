@@ -4,14 +4,26 @@
         <template id="rest_staff_qweb_report_template">
             <!--            # here docs work like a self (self means object and it is used in python file but in qweb doc means object and here o is loop's variable)-->
             <t t-call="web.html_container">
-                <!--                from this way we itrate document fields and o is loop's variable-->
+                <!--                from this way we iterate document fields and o is loop's variable-->
                 <t t-foreach="docs" t-as="o">
-
+                    <!--                    if we want to call function at the time print press then do like this and we get all values in variable-->
+                    <t t-set="valuesthroughfunction" t-value="o.get_values_in_report()"/>
                     <t t-call="web.internal_layout">
                         <!--                        # external_layout is used for company data external_layout and-->
                         <!--                        html_container both are default templates we just call it-->
-                        <div class="page">
+                        <div class="page" style="page-break-before:always;">
+                            <!--                            # watermark on page-->
+                            <div style="position:absolute;text-align:center;z-index:-1;border:0;opacity:0.5;padding-top:330px;padding-left:145px">
+                                <img t-att-src="'data:image/png;base64,%s' %to_text(o.user_company.logo)"
+                                     style="height:600px;width:600px;opacity:0.15;"/>
+                            </div>
                             <br/>
+                            <!--                            if we want to make any calculation in xml file then we need to create variable, set values through -->
+                            <!--                            <t t-set="count" t-value="1"/> this and get value through <spen t-esc="count"/>-->
+                            <t t-set="count" t-value="1"/>
+                            <!--                            # get variable value like this-->
+                            <spen t-esc="count"/>
+                            <p>This value comes through line 25</p>
                             <br/>
                             <h1>Normal fields data</h1>
                             <ul>
@@ -73,12 +85,16 @@
                                 <!--                                # if we want to get data in table-->
                                 <table width="100%" style="border:1px solid black;">
                                     <tr>
+                                        <th>Ser No.</th>
                                         <th>Country Id</th>
                                         <th>Country Name</th>
                                         <th>Country Code</th>
                                     </tr>
                                     <t t-foreach="o.country_ids" t-as="c">
                                         <tr>
+                                            <td>
+                                                <span t-esc="count"/>
+                                            </td>
                                             <td>
                                                 <span t-field="c.id"/>
                                             </td>
@@ -89,9 +105,14 @@
                                                 <span t-field="c.code"/>
                                             </td>
                                         </tr>
+                                        <t t-set="count" t-value="count + 1"/>
                                     </t>
                                 </table>
                             </ul>
+                            <spen t-esc="valuesthroughfunction"/>
+                            <!--                            or-->
+                            <spen t-esc="valuesthroughfunction['fourth']"/>
+                            <spen t-esc="valuesthroughfunction['current_datetime    ']"/>
                         </div>
                     </t>
                 </t>
@@ -100,6 +121,7 @@
     </data>
 
     <!--    declare qweb report-->
+    <!--    if we want to hide print button then just add menu="False" field-->
     <report
             id="rest_staff_report_id"
             model="rest.staff"
@@ -107,5 +129,6 @@
             string="Print Staff Data"
             name="tutorial_project.rest_staff_qweb_report_template"
             file="tutorial_project.rest_staff_qweb_report_template"
+            print_report_name="'Staff Report'"
     />
 </odoo>

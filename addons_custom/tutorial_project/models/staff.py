@@ -195,11 +195,17 @@ class RestStaff(models.Model):
         res['dob'] = date.today()
         res['country_ids'] = [(6, 0, lst)]  # for many2many field
         res['staff_line_ids'] = [(0, 0, {'name': 'First Record', 'product_id': 2}),
-                                 (0, 0, {'name': '2nd Record', 'product_id': 3})] # for one2many field
+                                 (0, 0, {'name': '2nd Record', 'product_id': 3})]  # for one2many field
 
         print(lst)
         print(res)
         return res
+
+    # This function is called on staff_report.xml
+    def get_values_in_report(self):
+        current_datetime = datetime.now()
+        dict = {'first': 1, 'second': 2, 'third': 3, 'fourth': [1, 2, 3, 4, 5, 6, 7], 'current_datetime': current_datetime}
+        return dict
 
 
 class RestStaffLines(models.Model):
