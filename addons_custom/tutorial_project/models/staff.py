@@ -212,6 +212,15 @@ class RestStaff(models.Model):
     def report_print_button(self):
         return self.env.ref('tutorial_project.rest_staff_report_id').report_action(self)
 
+    # onchange is used when 1 field is dependent on another field but only for current record not for all records
+    @api.onchange('country_id')
+    def checkonchange(self):
+        for rec in self:
+            if rec.country_id.name == 'Pakistan':
+                rec.is_pak = True
+            else:
+                rec.is_pak = False
+
 
 class RestStaffLines(models.Model):
     _name = 'rest.staff.lines'
