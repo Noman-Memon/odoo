@@ -159,6 +159,7 @@ class RestStaffWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
         }
 
+
 class RestStaffWizardLines(models.TransientModel):
     _name = 'rest.staff.wizard.lines'
     _description = 'This model store line data of staff'
@@ -167,4 +168,3 @@ class RestStaffWizardLines(models.TransientModel):
     connecting_field = fields.Many2one('rest.staff.wizard', string="staff ID")
     product_id = fields.Many2one('product.product', string="Products")
     sequence = fields.Integer(string="Seq.")
-

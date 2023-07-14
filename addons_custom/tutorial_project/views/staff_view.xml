@@ -2,6 +2,7 @@
     <!--    # if we want ti disable specific days of week then options attribute is use here 0 means sunday line 51-->
     <!--    if we want to make any field readonly on the bases of other field value line 42-->
     <!--    if we want to make any button invisible on the bases of any field value line 20-->
+    <!--    if we want to show specific status in status bar then use statusbar_visible this attribute line 24-->
     # Form View
     <record id="rest_staff_view_form" model="ir.ui.view">
         <field name="name">rest.staff.view.form</field>
@@ -20,7 +21,7 @@
                             class="oe_highlight" attrs="{'invisible':[('status','!=','active')]}"/>
                     <button name="delete_one2many" string="delete lines" type="object" class="oe_highlight"/>
                     <button name="check_orm" string="Check Orm" type="object" class="oe_highlight"/>
-                    <field name="status" widget="statusbar"/>
+                    <field name="status" widget="statusbar" statusbar_visible="active"/>
                     <button name="changestatus" string="Change Status" type="object" class="oe_highlight"
                             attrs="{'invisible':[('status','!=','active')]}"/>
                 </header>
