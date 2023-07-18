@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <!--        in ref sale module&ndash;&gt; form&ndash;&gt; external_id-->
+        <record id="rest_staff_sale_order_view_form" model="ir.ui.view">
+            <field name="name">rest.staff.sale.order.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="test"/>
+                    <field name="staff_id"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -77,13 +77,12 @@ class RestStaffWizard(models.TransientModel):
             'country_id': self.country_id.id,  # for update many2one field
             'country_ids': [(6, 0, country_list)],
             'staff_line_ids': list2,
-
         }
         upd_var.write(vals)
         # if we want to not close wizard automatically then just return this
-        return {
-            'type': 'ir.actions.do.nothing'
-        }
+        # return {
+        #     'type': 'ir.actions.do.nothing'
+        # }
 
     # set default values on wizard fields from current record fields value
     def default_get(self, fields):
