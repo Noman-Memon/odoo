@@ -3,6 +3,9 @@
     <data>
         <!-- Inherit Form View to Modify it -->
         <!--        in ref sale module&ndash;&gt; form&ndash;&gt; external_id-->
+        <!--        position="replace" is used when we replace any field with new inherited field but field must be present in current
+         external id e.g.(ref="sale.view_order_form" line 14 to 18)-->
+        <!--        if we want replace field but not enter any new field then do line 25-->
         <record id="rest_staff_sale_order_view_form" model="ir.ui.view">
             <field name="name">rest.staff.sale.order.view.form</field>
             <field name="model">sale.order</field>
@@ -14,10 +17,27 @@
                     <field name="test"/>
                     <field name="staff_id"/>
                 </xpath>
+                <!--                <xpath expr="//field[@name='payment_term_id']" position="replace">-->
+                <!--                    &lt;!&ndash; Add your fields or attributes here &ndash;&gt;-->
+                <!--                    <field name="test"/>-->
+                <!--                    <field name="staff_id"/>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//field[@name='payment_term_id']" position="replace"/>-->
+            </field>
+        </record>
+        <record id="rest_staff_sale_order_view_tree" model="ir.ui.view">
+            <field name="name">rest_staff_sale_order_view_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='create_date']" position="after">
+                    <!-- Add new fields here -->
+                    <field name="staff_id"/>
+                </xpath>
 
             </field>
         </record>
-
 
     </data>
 </odoo>
