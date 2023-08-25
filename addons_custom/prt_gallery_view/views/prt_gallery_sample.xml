@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 
+    Copyright (C) Cetmix OÜ
+
+   Odoo Proprietary License v1.0
+ 
+   This software and associated files (the "Software") may only be used (executed,
+   modified, executed after modifications) if you have purchased a valid license
+   from the authors, typically via Odoo Apps, or if you have received a written
+   agreement from the authors of the Software (see the COPYRIGHT file).
+ 
+   You may develop Odoo modules that use the Software as a library (typically
+   by depending on it, importing it and using its resources), but without copying
+   any source code or material from the Software. You may distribute those
+   modules under the license of your choice, provided that this license is
+   compatible with the terms of the Odoo Proprietary License (For example:
+   LGPL, MIT, or proprietary licenses similar to this one).
+ 
+   It is forbidden to publish, distribute, sublicense, or sell copies of the Software
+   or modified copies of the Software.
+ 
+   The above copyright notice and this permission notice must be included in all
+   copies or substantial portions of the Software.
+ 
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+   ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE.
+-->
+<odoo>
+
+    <!--#######################################
+        # Using Product.Template as a sample #
+        #######################################-->
+
+
+    <!--## ImageGrid ##-->
+
+    <record id="product_template_image_grid" model="ir.ui.view">
+        <field name="name">product.template.image.grid</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <image_grid item_height="200" item_width="200">
+                <image>
+                    <field name="image_medium" widget="image"/>
+                </image>
+                <caption>
+                    <field name="name"/>
+                </caption>
+            </image_grid>
+        </field>
+    </record>
+
+    <!--## Gallery ##-->
+
+    <record id="product_template_gallery" model="ir.ui.view">
+        <field name="name">product.template.gallery</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <gallery>
+                <field name="currency_id" invisible="1"/>
+                <caption>
+                    <field name="name"/>, price:
+                    <field name="list_price"
+                           widget='monetary'
+                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </caption>
+                <image name="main_image">
+                    <field name="image" widget="gallery_image"/>
+                </image>
+            </gallery>
+        </field>
+    </record>
+
+    <!--## Gallery ##-->
+    <record id="product.product_template_action" model="ir.actions.act_window">
+        <field name="name">Action</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,tree,image_grid,form,gallery</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_empty_folder">
+                there is no records of staff
+            </p>
+        </field>
+    </record>
+
+</odoo>

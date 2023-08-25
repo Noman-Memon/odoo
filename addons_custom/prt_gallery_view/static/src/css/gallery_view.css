@@ -1,0 +1,177 @@
+/* ImageGrid View */
+.o_image_grid_view {
+  width: 100%;
+  height: 100%;
+}
+
+.o_image_grid_container {
+    display: flex;
+    display: -webkit-flex; /* Safari workaround */
+    flex-flow: row wrap;
+    align-content: stretch;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+/*    box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1); */
+}
+
+.o_image_grid_item {
+    flex: 1 1 auto;
+    padding: 5px;
+    margin: 1px;
+    background: #fff;
+    border: 1px solid #EBEFF2;
+}
+
+.oe_image_grid_caption {
+      cursor: pointer;
+      text-align: center;
+      padding: 2px;
+      height: auto;
+  }
+
+.oe_image_grid_image {
+    width: auto;
+    height: 80%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+
+    .img-responsive {
+      object-fit: contain;
+      cursor: zoom-in;
+      width: auto;
+/*      min-height: 30vh!important;
+      max-height: 60vh!important; */
+    }
+}
+
+/* Gallery View */
+.o_gallery_view {
+  background-color: @odoo-view-background-color;
+  width: 100%;
+  height: 100%;
+}
+
+.oe_caption_container {
+    width: 100%;
+    height: 7%;
+    border: 0px;
+    margin: 0px;
+    padding: 2px;
+    border-color: rgb(229, 126, 0);
+    text-align: center;
+}
+
+.oe_image_table {
+    vertical-align: middle;
+    text-align: center;
+    height: 93%;
+    width: 100%;
+    border: 0px;
+    margin: 0px;
+  }
+
+.oe_gallery_image_container {
+    margin: auto;
+    width: auto;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    object-fit: contain!important;
+
+      .img-responsive {
+      cursor: zoom-in;
+      width: auto;
+      min-height: 30vh!important;
+      max-height: 60vh!important;
+    }
+}
+
+.oe_gallery_caption {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(229, 126, 0);
+    border-radius: 0px;
+    border-style: none;
+    padding: 8px 12px 8px 12px;
+    margin: 0 0 0px 0;
+    line-height: 1.42857;
+    font-size: 13px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 500;
+    height: 7%;
+    min-height: 29px;
+}
+
+
+.oe_gallery_button_prev {
+      background: none;
+      top: 0%;
+      cursor: pointer;
+      width: 5%;
+      height: 100%;
+      position: absolute;
+      opacity: 1;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 0px;
+      float:left;
+      left:0px;
+      background-image:url(/prt_gallery_view/static/src/img/arrow-left-s.png);
+  }
+
+.oe_gallery_button_next {
+      background: none;
+      top: 0%;
+      cursor: pointer;
+      width: 5%;
+      height: 100%;
+      position: absolute;
+      opacity: 1;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 0px;
+      float:right;
+      right:0px;
+      background-image:url(/prt_gallery_view/static/src/img/arrow-right-s.png);
+  }
+
+
+/* The Modal (background) */
+.gallery-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 30; /* Sit on top */
+    padding-top: 5px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(13,13,13); /* Fallback color */
+  }
+
+.o_loading {
+    z-index: 31;
+  }
+
+
+/* Modal Content (Image) */
+.gallery-modal-content {
+    margin: auto;
+    display: block;
+    width: auto;
+    text-align: center;
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain!important;
+
+    .img-responsive {
+      cursor: zoom-in;
+      width: auto;
+    }
+  }
